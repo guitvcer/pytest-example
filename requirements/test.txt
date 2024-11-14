@@ -1,0 +1,7 @@
+pytest
+pytest-freezegun
+pytest-mock
+pytest-asyncio
+pytest-xdist
+pytest-cov
+sanic-testing==24.6.*

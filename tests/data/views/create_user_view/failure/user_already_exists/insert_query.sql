@@ -1,0 +1,1 @@
+INSERT INTO users (username, created_at) VALUES ('pytest-example', '2025-01-01T00:00:00+00:00');

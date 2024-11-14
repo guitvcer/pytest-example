@@ -1,0 +1,5 @@
+{
+  "description": "Bad Request",
+  "message": "User already exists",
+  "status": 400
+}

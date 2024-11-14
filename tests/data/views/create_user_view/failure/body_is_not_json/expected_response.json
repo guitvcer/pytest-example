@@ -1,0 +1,5 @@
+{
+  "description": "Bad Request",
+  "message": "Body is not JSON",
+  "status": 400
+}

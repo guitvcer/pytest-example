@@ -1,0 +1,33 @@
+version: '3.8'
+
+x-pytest-example-commons:
+  &pytest-example-commons
+  image: pytest-example:latest
+  depends_on:
+    - pytest-example-db
+  environment:
+    - DEBUG=True
+    - DATABASE_URL=postgresql://postgres@pytest-example-db/postgres?sslmode=disable
+  volumes:
+    - .:/proj
+    - /proj/bin  # To not overwrite file modes.
+  stdin_open: true
+  tty: true
+
+services:
+  pytest-example:
+    <<: *pytest-example-commons
+    build:
+      context: .
+      args:
+        - PIP_TOKEN
+    command: python -m src.app
+
+  pytest-example-listener:
+    <<: *pytest-example-commons
+    command: python -m src.listener
+
+  pytest-example-db:
+    image: postgres:17
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust

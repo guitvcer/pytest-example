@@ -1,0 +1,5 @@
+{
+  "description": "Bad Request",
+  "message": "Username is required",
+  "status": 400
+}

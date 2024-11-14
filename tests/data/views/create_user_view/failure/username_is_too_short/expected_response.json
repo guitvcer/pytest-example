@@ -1,0 +1,5 @@
+{
+  "description": "Bad Request",
+  "message": "Username length must be between 4 and 32 symbols.",
+  "status": 400
+}
