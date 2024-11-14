@@ -1,2 +1,4 @@
 sanic==24.6.*
 asyncpg==0.30.*
+asyncpg-stubs==0.30.*
+mypy==1.13.*
