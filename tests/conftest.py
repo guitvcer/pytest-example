@@ -22,7 +22,9 @@ def app(db_url: str) -> SanicASGITestClient:
 
 
 @fixture
-async def db_conn(mocker: MockerFixture, db_url: str) -> AsyncIterator[asyncpg.Connection]:
+async def db_conn(
+    mocker: MockerFixture, db_url: str
+) -> AsyncIterator[asyncpg.Connection]:
     db_name = get_db_name(db_url)
     await create_database(db_name)
 

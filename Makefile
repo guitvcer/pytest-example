@@ -9,6 +9,18 @@ mypy:
 	docker compose exec pytest-example mypy tests/ --ignore-missing-imports
 
 
+ruff_check:
+	docker compose up -d
+	docker compose exec pytest-example ruff check src/ tests/
+
+
+ruff_format:
+	docker compose up -d
+	docker compose exec pytest-example ruff format src/ tests/
+
+
 test:
 	make pytest
 	make mypy
+	make ruff_format
+	make ruff_check

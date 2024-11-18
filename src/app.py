@@ -6,7 +6,7 @@ from sanic.exceptions import BadRequest
 from . import settings
 from .database import create_user
 
-app = Sanic('pytest-example')
+app = Sanic("pytest-example")
 app.config.DATABASE_URL = settings.DATABASE_URL
 
 
@@ -20,29 +20,29 @@ async def close_db_conn(request: Request, response: HTTPResponse) -> None:
     await request.ctx.db_conn.close()
 
 
-@app.post('/users')
+@app.post("/users")
 async def create_user_view(request: Request) -> HTTPResponse:
     try:
-        username = request.json.get('username')
+        username = request.json.get("username")
     except AttributeError as exc:
-        raise BadRequest('Body is not JSON') from exc
+        raise BadRequest("Body is not JSON") from exc
 
     if username is None:
-        raise BadRequest('Username is required')
+        raise BadRequest("Username is required")
 
     if not isinstance(username, str):
-        raise BadRequest('Username must be a string')
+        raise BadRequest("Username must be a string")
 
     if len(username) < 4 or len(username) > 32:
-        raise BadRequest('Username length must be between 4 and 32 symbols.')
+        raise BadRequest("Username length must be between 4 and 32 symbols.")
 
     try:
         user_id = await create_user(username, request.ctx.db_conn)
     except UniqueViolationError as exc:
-        raise BadRequest('User already exists') from exc
+        raise BadRequest("User already exists") from exc
 
-    return response.json({'id': user_id}, status=201)
+    return response.json({"id": user_id}, status=201)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(single_process=True)
